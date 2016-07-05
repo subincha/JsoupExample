@@ -22,14 +22,14 @@ public class Annapurnapost {
 
     public void category(String category) throws IOException {
         Document doc = Jsoup.connect(category).userAgent("Mozilla/5.0").timeout(60*1000).get();
-        Elements columnLink = doc.select("div[class~=col-xs-12.col-sm-4.col-md-4]");
+        Elements columnLink = doc.select("div[class~=col-xs-12.col-sm-12.col-md-12.?]");
         System.out.println(columnLink.size());
         for (Element link : columnLink) {
-            if(!link.select("a:not(.read-more)").text().equals("")) {
+            if(!link.select("span.maintitle").text().equals("")) {
                 System.out.println("\nlink: " + link.select("a").attr("abs:href"));
-                System.out.println("text: " + link.select("a:not(.read-more)").text());
-                System.out.println("Time: " + link.select("p.author").text());
-                System.out.println("Description: " + link.select("div.teaser").text());
+                System.out.println("text: " + link.select("span.maintitle").text());
+                System.out.println("Time: " + link.select("span.dates.first").text());
+                System.out.println("Description: " + link.select("span.description").text());
                 System.out.println("Image: " + link.select("img[src]").attr("src"));
                
             }
@@ -37,8 +37,8 @@ public class Annapurnapost {
     }
     
     public HashMap<String, List> getCategory() throws IOException {
-        Document doc = Jsoup.connect("http://kathmandupost.ekantipur.com/").userAgent("Mozilla/5.0").timeout(60 * 1000).get();
-        Elements catagories = doc.select("a[href~=/category/?]");
+        Document doc = Jsoup.connect("http://www.annapurnapost.com/").userAgent("Mozilla/5.0").timeout(60 * 1000).get();
+        Elements catagories = doc.select("a[href~=/newslist/?]");
         HashMap<String, List> catagoryAndLink = new HashMap<>();
         List<String> eachCategory = new ArrayList<>();
         List<String> eachLink = new ArrayList<>();
