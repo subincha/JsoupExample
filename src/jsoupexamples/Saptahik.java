@@ -49,4 +49,14 @@ public class Saptahik {
         return catagoryAndLink;
 
     }
+    
+     public void detailNews(String url) throws IOException {
+        Document doc = Jsoup.connect(url).userAgent("Mozilla/5.0").timeout(60 * 1000).get();
+        Element news = doc.select("div.maincontent").first();
+        System.out.println("\nTitle: " + news.select("div#content").first().select("h1").text());
+        System.out.println("text: " + news.select("p:not(.author)").text());
+        System.out.println("author: " + news.select("p.author").text());
+        System.out.println("dates: " + news.select("span.dates").text());
+        System.out.println("Image: " + news.select("img[src]").attr("abs:src"));
+    }
 }
