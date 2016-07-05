@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 public class JsoupExamples {
+
     public static void main(String[] args) {
         Republica republica = new Republica();
         NagarikNews nagarikNews = new NagarikNews();
@@ -21,6 +21,7 @@ public class JsoupExamples {
         Saptahik saptahik = new Saptahik();
         TheHimalayanTimes theHimalayanTimes = new TheHimalayanTimes();
         NepalPatrika nepalPatrika = new NepalPatrika();
+        Annapurnapost annapurnaPost = new Annapurnapost();
         try {
             HashMap<String, List> categoryAndList = theHimalayanTimes.getCategory();
             List<String> eachCategory = categoryAndList.get("catagory");
@@ -33,9 +34,10 @@ public class JsoupExamples {
             //ekantipur.cartoon();
             //republica.category(eachLink.get(1));
             //republica.category("23");
-//            nagarikNews.category("21");
-           // nepalPatrika.category(eachLink.get(1));
-            theHimalayanTimes.category(eachLink.get(1));
+            //nagarikNews.category("21");
+            // nepalPatrika.category(eachLink.get(1));
+            // annapurnaPost.category(eachLink.get(1));
+            theHimalayanTimes.detailNews("http://thehimalayantimes.com/kathmandu/meeting-of-eminent-persons-group-epg-on-nepal-india-relations-concludes/");
         } catch (IOException ex) {
             Logger.getLogger(JsoupExamples.class.getName()).log(Level.SEVERE, null, ex);
         }
